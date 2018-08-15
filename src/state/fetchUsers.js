@@ -10,6 +10,15 @@ export const setUsersAction = data => ({
     data
 })
 
+export const fetchUsersAction = () => (dispatch, getState) => {
+    dispatch(usersStartedLoadingAction())
+    fetch('https://randomuser.me/api?results=10')
+        .then(response => response.json())
+        .then(data => {
+            dispatch(setUsersAction(data))
+            dispatch(usersStoppedLoadingAction())
+        })
+}
 const initialState = {
     users: null,
     isUsersAreLoading: false
