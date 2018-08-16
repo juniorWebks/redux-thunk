@@ -11,6 +11,23 @@ export const onEmailChangeAction = value => ({
     value
 })
 
+export const setUserAction = user => ({
+    type: SET_USER,
+    user
+})
+
+export const initAuthStateListening = () => (dispatch, getstate) => {
+    firebaseAuth.onAuthStateChanged(user => {
+        if (user) {
+//dispatch after login actions
+        } else {
+//dispatch after logout actions
+        }
+        dispatch(setUserAction(user))  //user is null if user is logged out
+    }
+    )
+}
+
 export const onPasswordChangeAction = value => ({
     type: PASSWORD_CHANGE,
     value
@@ -50,6 +67,14 @@ export default (state = initialState, action) => {
                 ...state,
                 password: action.value
             }
+        }
+        switch(action.type){
+            case SET_USER:
+            return {
+                ...state,
+                user:action.user
+            }
+
 
 
 
