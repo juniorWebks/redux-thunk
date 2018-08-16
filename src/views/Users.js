@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 
 const Users = (props) => (
   <div>
-     {props._users && props._users.results.map(user=> (
-       <p>{user.name.first}, {user.name.last}, {user.email}</p>
-     ))}
-    console.log(results)
+    {props._users && props._users.results.map(user => (
+      <div>
+      <div>{user.name.first}</div>
+      <div>{user.name.last}</div> 
+      <div><img src={user.picture.thumbnail} /></div>
+      </div>
+    ))}
   </div>
 )
 

@@ -6,7 +6,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Auth />
+        <Auth>
+          <Users />
+        </ Auth>
       </div>
     )
   }

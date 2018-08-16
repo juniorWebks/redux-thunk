@@ -1,5 +1,6 @@
 //kaczka set user akcja asynchroniczna
 import { auth as firebaseAuth } from '../firebaseConfig'
+import {fetchUsersAction} from './fetchUsers'
 
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
@@ -18,12 +19,13 @@ export const setUserAction = user => ({
 
 export const initAuthStateListening = () => (dispatch, getstate) => {
     firebaseAuth.onAuthStateChanged(user => {
+        dispatch(setUserAction(user))  //user is null if user is logged out
         if (user) {
-//dispatch after login actions
+dispatch(fetchUsersAction())//dispatch after login actions
         } else {
 //dispatch after logout actions
         }
-        dispatch(setUserAction(user))  //user is null if user is logged out
+        
     }
     )
 }
@@ -32,6 +34,11 @@ export const onPasswordChangeAction = value => ({
     type: PASSWORD_CHANGE,
     value
 })
+export const logOutAction = () => (dispatch, getState) => {
+    firebaseAuth.signOut()
+    .then (() => console.log('SIGNOUT OK'))
+    .then (() => console.log('SIGNOUT ERROR'))
+}
 
 export const onLogInClickAction = () => (dispatch, getState) => {
     const state = getState()
