@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react'
 
-
-
-class App extends Component {
+import Users from './views/Users'
+import Auth from './components/Auth'
+class App extends React.Component {
   render() {
     return (
       <div>
-
+        <Auth />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
